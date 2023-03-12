@@ -18,52 +18,54 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.alejandro.apirest.entity.Cliente;
+import me.alejandro.apirest.entity.Comercial;
 import me.alejandro.apirest.service.ClienteService;
+import me.alejandro.apirest.service.ComercialService;
 
 @RestController
-@RequestMapping("/cliente")
-public class ClienteController {
+@RequestMapping("/comercial")
+public class ComercialController {
 
 	@Autowired
-	public ClienteService clienteService;
+	public ComercialService comercialService;
 
 	// Método para insertar valores
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody Cliente cliente) {
+	public ResponseEntity<?> create(@RequestBody Comercial comercial) {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(cliente));
+		return ResponseEntity.status(HttpStatus.CREATED).body(comercialService.save(comercial));
 	}
 
 	// Consulta por id
 	@GetMapping("/{id}")
 	public ResponseEntity<?> read(@PathVariable(value = "id") Integer id) {
 
-		Optional<Cliente> cliente = clienteService.findById(id);
+		Optional<Comercial> comercial = comercialService.findById(id);
 
-		if (!cliente.isPresent()) {
+		if (!comercial.isPresent()) {
 			return ResponseEntity.notFound().build();
 		} else {
-			return ResponseEntity.ok(cliente);
+			return ResponseEntity.ok(comercial);
 		}
 	}
 
 	// Método para actualizar
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@RequestBody Cliente cliente, @PathVariable(value = "id") Integer id) {
+	public ResponseEntity<?> update(@RequestBody Comercial comercial, @PathVariable(value = "id") Integer id) {
 
-		Optional<Cliente> clienteModificar = clienteService.findById(id);
+		Optional<Comercial> comercialModificar = comercialService.findById(id);
 
-		if (!clienteModificar.isPresent()) {
+		if (!comercialModificar.isPresent()) {
 			return ResponseEntity.notFound().build();
 		}
 
 		// Actualizamos los valores
-		clienteModificar.get().setId(cliente.getId());
-		clienteModificar.get().setNombre(cliente.getNombre());
-		clienteModificar.get().setApellido1(cliente.getApellido1());
-		clienteModificar.get().setApellido2(cliente.getApellido2());
+		comercialModificar.get().setId(comercial.getId());
+		comercialModificar.get().setNombre(comercial.getNombre());
+		comercialModificar.get().setApellido1(comercial.getApellido1());
+		comercialModificar.get().setApellido2(comercial.getApellido2());
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.save(clienteModificar.get()));
+		return ResponseEntity.status(HttpStatus.CREATED).body(comercialService.save(comercialModificar.get()));
 
 	}
 
@@ -71,24 +73,24 @@ public class ClienteController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value = "id") Integer id) {
 
-		Optional<Cliente> cliente = clienteService.findById(id);
+		Optional<Comercial> comercial = comercialService.findById(id);
 
-		if (!cliente.isPresent()) {
+		if (!comercial.isPresent()) {
 			return ResponseEntity.notFound().build();
 		} else {
-			clienteService.deleteByiD(id);
+			comercialService.deleteByiD(id);
 			return ResponseEntity.ok().build();
 		}
 	}
 
 	// Consulta por id
 	@GetMapping
-	public List<Cliente> readAll() {
-		Iterable<Cliente> personasIterable = clienteService.findAll();
-		List<Cliente> personas = StreamSupport.stream(personasIterable.spliterator(), false)
+	public List<Comercial> readAll() {
+		Iterable<Comercial> comercialesIterable = comercialService.findAll();
+		List<Comercial> comerciales = StreamSupport.stream(comercialesIterable.spliterator(), false)
 				.collect(Collectors.toList());
 
-		return personas;
+		return comerciales;
 
 	}
 

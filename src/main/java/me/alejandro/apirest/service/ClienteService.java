@@ -10,7 +10,7 @@ public interface ClienteService {
 	
 	public Optional<Cliente> findById(Integer id);
 	
-	public Cliente save(Cliente persona);
+	public Cliente save(Cliente cliente);
 	
 	public void deleteByiD(Integer id);
 	
