@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -26,12 +27,12 @@ public class Pedido {
 	
 	@ManyToOne
     @JoinColumn(name="id_cliente")
-	@JsonManagedReference
+	@JsonIgnore
     private Cliente cliente;
     
     @ManyToOne
     @JoinColumn(name="id_comercial")
-    @JsonManagedReference
+    @JsonIgnore
     private Comercial comercial;
 
     public Pedido() {

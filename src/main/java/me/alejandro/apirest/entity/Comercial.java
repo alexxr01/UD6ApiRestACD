@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "comercial")
@@ -26,7 +27,6 @@ public class Comercial {
 	private double comision;
 	
 	@OneToMany(mappedBy="comercial")
-	@JsonBackReference
 	private List<Pedido> pedidos;
 
 	public Comercial() {
