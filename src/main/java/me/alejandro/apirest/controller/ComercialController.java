@@ -32,7 +32,7 @@ public class ComercialController {
 	// Método para insertar valores
 	@PostMapping
 	public ResponseEntity<?> create(@RequestBody Comercial comercial) {
-
+		
 		return ResponseEntity.status(HttpStatus.CREATED).body(comercialService.save(comercial));
 	}
 
