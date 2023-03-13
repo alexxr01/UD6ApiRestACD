@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "comercial")
 public class Comercial {
@@ -20,12 +22,16 @@ public class Comercial {
 	private String apellido1;
 	@Column
 	private String apellido2;
-	@Column
+	@Column(name = "comisión")
 	private double comision;
 	
 	@OneToMany(mappedBy="comercial")
+	@JsonBackReference
 	private List<Pedido> pedidos;
 
+	public Comercial() {
+		
+	}
 	public Comercial(int id, String nombre, String apellido1, String apellido2, double comision, List<Pedido> pedido) {
 		super();
 		this.id = id;

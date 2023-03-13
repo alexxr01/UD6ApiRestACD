@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -24,12 +26,17 @@ public class Pedido {
 	
 	@ManyToOne
     @JoinColumn(name="id_cliente")
+	@JsonManagedReference
     private Cliente cliente;
     
     @ManyToOne
     @JoinColumn(name="id_comercial")
+    @JsonManagedReference
     private Comercial comercial;
 
+    public Pedido() {
+    	
+    }
 	public Pedido(int id, double cantidad, Date fecha, Cliente cliente, Comercial comercial) {
 		super();
 		this.id = id;

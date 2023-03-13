@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -23,10 +25,11 @@ public class Cliente {
 	private String apellido2;
 	@Column
 	private String ciudad;
-	@Column
+	@Column(name = "categoría")
 	private String categoria;
 	
 	@OneToMany(mappedBy = "cliente")
+	@JsonBackReference
 	private List<Pedido> pedidos;
 
 	public Cliente() {
